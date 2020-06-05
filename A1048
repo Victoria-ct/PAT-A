@@ -1,0 +1,34 @@
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+int main(){
+    int n,m;
+    int str[100010];
+    scanf("%d%d",&n,&m);
+    bool flag=false;
+    for(int i=0;i<n;i++){
+        scanf("%d",&str[i]);
+    }
+    sort(str,str+n);
+    int HashTable[100010]={0};
+    for(int i=0;i<n;i++){
+        HashTable[str[i]]++;
+    }
+    for(int i=0;i<n;i++){
+        int idx=m-str[i];
+        if(HashTable[idx]>0&&idx!=str[i]){
+            printf("%d %d",str[i],m-str[i]);
+            flag=true;
+            break;
+        }
+        if(HashTable[idx]>1&&idx==str[i]){
+            printf("%d %d",str[i],m-str[i]);
+            flag=true;
+            break;
+        }
+    }
+    if(flag==false){
+        printf("No Solution");
+    }
+    return 0;
+}
