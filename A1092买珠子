@@ -1,0 +1,32 @@
+#include <cstdio>
+#include <cstring>
+int main(){
+    char str1[1010],str2[1010];
+    scanf("%s %s",str1,str2);
+    int len1=strlen(str1);
+    int len2=strlen(str2);
+    int count=0;
+    bool flag=true;
+    int HashTable[128]={0};
+    for(int i=0;i<len1;i++){
+        char c1=str1[i];
+        HashTable[c1]++;
+    }
+    for(int i=0;i<len2;i++){
+        char c2=str2[i];
+        if(HashTable[c2]<=0){
+            count++;
+            flag=false;
+        }
+        if(HashTable[c2]>0){
+            HashTable[c2]--;
+        }
+    }
+    if(flag==true){
+        int sum=len1-len2;
+        printf("Yes %d",sum);
+    }else{
+        printf("No %d",count);
+    }
+    return 0;
+}
