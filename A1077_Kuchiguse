@@ -1,0 +1,41 @@
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+const int maxn = 110;
+char buf[maxn][260];
+ 
+int main(void){
+    int n;cin>>n;
+    bool flag = true;           //默认存在相同后缀 
+    int index;
+    getchar();      //消除回车的影响 
+    for(int i = 0;i < n;i++) {
+        index = 0;
+        fgets(buf[i],260,stdin);
+        if(i > 0) {
+            int len1 = strlen(buf[i-1]) - 1;
+            int len2 = strlen(buf[i]) - 1;
+            for(int x = len1-1,y = len2 - 1;x >= 0 && y >= 0;x--,y--) {
+                if(buf[i-1][x] == buf[i][y]) 
+                    index++;
+                else break;
+            }
+            if(index == 0) {
+                flag = false;
+            }
+        }
+    }
+    
+    if(flag == false) printf("nai");
+    else {
+        int len = strlen(buf[n-1]) - 1;
+        for(int i = len - index;i < len;i++) {
+            printf("%c",buf[n-1][i]);
+        }
+    }
+    return 0;
+}
+
+
